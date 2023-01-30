@@ -1,0 +1,6 @@
+# Ignore compiled output.
+dist
+
+# OS-specific artifacts
+.DS_Store
+thumbs.db

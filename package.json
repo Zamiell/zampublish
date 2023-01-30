@@ -1,0 +1,27 @@
+{
+  "name": "zampublish",
+  "version": "0.0.0",
+  "description": "",
+  "keywords": [],
+  "homepage": "https://github.com/Zamiell/zampublish",
+  "bugs": {
+    "url": "https://github.com/Zamiell/zampublish/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Zamiell/zampublish.git"
+  },
+  "license": "GPL-3.0",
+  "type": "commonjs",
+  "author": "Zamiell",
+  "scripts": {
+    "build": "tsc",
+    "start": "node dist/main"
+  },
+  "devDependencies": {
+    "@types/node": "^18.11.18",
+    "typescript": "^4.9.4",
+    "isaacscript-lint": "^4.8.0",
+    "isaacscript-tsconfig": "^3.0.4"
+  }
+}
