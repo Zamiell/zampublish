@@ -11,7 +11,7 @@
     "type": "git",
     "url": "git+https://github.com/Zamiell/zampublish.git"
   },
-  "license": "GPL-3.0",
+  "license": "MIT",
   "type": "commonjs",
   "author": "Zamiell",
   "scripts": {

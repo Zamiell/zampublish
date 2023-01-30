@@ -7,6 +7,9 @@ module.exports = {
     "eslint-config-isaacscript/base",
   ],
 
+  // Don't bother linting the compiled output.
+  ignorePatterns: ["**/dist/**"],
+
   parserOptions: {
     // ESLint needs to know about the project's TypeScript settings in order for TypeScript-specific
     // things to lint correctly. We do not point this at "./tsconfig.json" because certain files
