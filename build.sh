@@ -8,8 +8,6 @@ DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 
 SECONDS=0
 
-cd "$DIR"
-
 NPM_LOCK="$DIR/package-lock.json"
 if test -f "$NPM_LOCK"; then
   NPM_LOCK_EXISTS=1
@@ -29,23 +27,17 @@ if [[ -z "$NPM_LOCK_EXISTS" && -z "$YARN_LOCK_EXISTS" && -z "$PNPM_LOCK_EXISTS" 
   echo "No package manager lock files were found. You should manually invoke the package manager that you want to use for this project. e.g. \"npm install\""
   exit 1
 elif [[ ! -z "$NPM_LOCK_EXISTS" && -z "$YARN_LOCK_EXISTS" && -z "$PNPM_LOCK_EXISTS" ]]; then
-  NPX="npx"
+  PACKAGE_MANAGER="npm"
 elif [[ -z "$NPM_LOCK_EXISTS" && ! -z "$YARN_LOCK_EXISTS" && -z "$PNPM_LOCK_EXISTS" ]]; then
-  NPX="npx"
+  PACKAGE_MANAGER="yarn"
 elif [[ -z "$NPM_LOCK_EXISTS" && -z "$YARN_LOCK_EXISTS" && ! -z "$PNPM_LOCK_EXISTS" ]]; then
-  NPX="pnpx"
+  PACKAGE_MANAGER="pnpm"
 else
   echo "Error: Multiple different kinds of package manager lock files were found. You should manually invoke the package manager that you want to use for this project. e.g. \"npm install\""
   exit 1
 fi
 
-OUT_DIR="$DIR/dist"
-rm -rf "$OUT_DIR"
-"$NPX" tsc
-
-# Copy the rest of the files needed for npm.
-cp "$DIR/LICENSE" "$OUT_DIR/"
-cp "$DIR/package.json" "$OUT_DIR/"
-cp "$DIR/README.md" "$OUT_DIR/"
+cd "$DIR"
+"$PACKAGE_MANAGER" run build
 
 echo "Successfully built in $SECONDS seconds."
