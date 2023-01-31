@@ -14,9 +14,8 @@
   "license": "MIT",
   "author": "Zamiell",
   "type": "module",
-  "scripts": {
-    "build": "rimraf dist && tsc",
-    "start": "node dist/main"
+  "bin": {
+    "zampublish": "./dist/main.js"
   },
   "dependencies": {
     "execa": "^6.1.0",
