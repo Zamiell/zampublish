@@ -38,9 +38,9 @@ export function incrementVersion(
 
   if (packageManager === PackageManager.YARN) {
     const packageName = getPackageJSONField("name");
-    execaCommandSync(`yarn config set version-tag-prefix ${packageName}-`);
+    execaCommandSync(`yarn config set version-tag-prefix '${packageName}-'`);
     execaCommandSync(
-      `yarn config set version-git-message "chore(release): ${packageName}-%s"`,
+      `yarn config set version-git-message 'chore(release): ${packageName}-%s'`,
     );
   }
 
