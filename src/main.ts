@@ -1,3 +1,5 @@
+#!/usr/bin/env node
+
 import { execaCommandSync } from "execa";
 import { error } from "isaacscript-common-ts";
 import sourceMapSupport from "source-map-support";
