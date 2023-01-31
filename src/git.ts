@@ -1,4 +1,4 @@
-import { execaCommandSync } from "execa";
+import { execaCommandSync, execaSync } from "execa";
 
 export function isGitRepository(): boolean {
   try {
@@ -16,6 +16,6 @@ export function isGitClean(): boolean {
 
 export function gitCommitAllAndPush(message: string): void {
   execaCommandSync("git add --all");
-  execaCommandSync(`git commit -m "${message}"`);
+  execaSync("git", ["commit", "--message", message]);
   execaCommandSync("git push");
 }
