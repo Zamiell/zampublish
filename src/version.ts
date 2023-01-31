@@ -1,4 +1,4 @@
-import { execaCommandSync } from "execa";
+import { execaCommandSync, execaSync } from "execa";
 import fs from "fs";
 import { error, isRecord } from "isaacscript-common-ts";
 import { PACKAGE_JSON } from "./constants.js";
@@ -38,10 +38,18 @@ export function incrementVersion(
 
   if (packageManager === PackageManager.YARN) {
     const packageName = getPackageJSONField("name");
-    execaCommandSync(`yarn config set version-tag-prefix '${packageName}-'`);
-    execaCommandSync(
-      `yarn config set version-git-message 'chore(release): ${packageName}'`,
-    );
+    execaSync("yarn", [
+      "config",
+      "set",
+      "version-tag-prefix",
+      `${packageName}-`,
+    ]);
+    execaSync("yarn", [
+      "config",
+      "set",
+      "version-git-message",
+      `chore(release): ${packageName}-%s`,
+    ]);
   }
 
   const versionFlag = getVersionFlag(args);
