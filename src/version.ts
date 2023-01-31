@@ -5,6 +5,18 @@ import { PACKAGE_JSON } from "./constants.js";
 import { PackageManager } from "./enums/PackageManager.js";
 import { Args } from "./parseArgs.js";
 
+export function getPackageJSONField(fieldName: string): string {
+  const packageJSON = getPackageJSON();
+  const field = packageJSON[fieldName];
+  if (typeof field !== "string") {
+    error(
+      `Failed to parse the "${fieldName}" field from the "${PACKAGE_JSON}" file.`,
+    );
+  }
+
+  return field;
+}
+
 function getPackageJSON(): Record<string, unknown> {
   const packageJSONString = fs.readFileSync(PACKAGE_JSON, "utf8");
   const packageJSON = JSON.parse(packageJSONString) as unknown;
@@ -13,28 +25,6 @@ function getPackageJSON(): Record<string, unknown> {
   }
 
   return packageJSON;
-}
-
-/** Returns the version from the "package.json" file. (There is no "v" prefix.) */
-export function getVersionOfThisPackage(): string {
-  const packageJSON = getPackageJSON();
-  const { version } = packageJSON;
-  if (typeof version !== "string") {
-    error(`Failed to parse the version from the "${PACKAGE_JSON}" file.`);
-  }
-
-  return version;
-}
-
-/** Returns the name from the "package.json" file. */
-function getNameOfThisPackage(): string {
-  const packageJSON = getPackageJSON();
-  const { name } = packageJSON;
-  if (typeof name !== "string") {
-    error(`Failed to parse the name from the "${PACKAGE_JSON}" file.`);
-  }
-
-  return name;
 }
 
 export function incrementVersion(
@@ -47,7 +37,7 @@ export function incrementVersion(
   }
 
   if (packageManager === PackageManager.YARN) {
-    const packageName = getNameOfThisPackage();
+    const packageName = getPackageJSONField("name");
     execaCommandSync(`yarn config set version-tag-prefix "${packageName}-"`);
     execaCommandSync(
       `yarn config set version-git-message "chore(release): ${packageName}-%s"`,

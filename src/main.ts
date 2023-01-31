@@ -16,7 +16,7 @@ import { gitCommitAllAndPush, isGitClean, isGitRepository } from "./git.js";
 import { isLoggedInToNPM } from "./npm.js";
 import { getPackageManagerUsedForThisProject } from "./packageManager.js";
 import { Args, parseArgs } from "./parseArgs.js";
-import { getVersionOfThisPackage, incrementVersion } from "./version.js";
+import { getPackageJSONField, incrementVersion } from "./version.js";
 
 main();
 
@@ -34,7 +34,7 @@ function main() {
   buildProject();
   lintProject();
 
-  const version = getVersionOfThisPackage();
+  const version = getPackageJSONField("version");
   gitCommitAllAndPush(`chore: release ${version}`);
 
   execaCommandSync("npm publish --access public");
