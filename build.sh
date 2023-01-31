@@ -49,3 +49,4 @@ cp "$DIR/package.json" "$OUT_DIR/"
 cp "$DIR/README.md" "$OUT_DIR/"
 
 echo "Successfully built in $SECONDS seconds."
+
