@@ -37,6 +37,8 @@ export function incrementVersion(
   }
 
   const versionFlag = getVersionFlag(args);
+  // The "--no-git-tag-version" flag will prevent the package manager from both making a commit and
+  // adding a tag.
   execaCommandSync(
     `${packageManager} version --no-git-tag-version --${versionFlag}`,
   );
