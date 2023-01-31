@@ -1,6 +1,7 @@
 # Compiled output
 dist
 
-# OS-specific artifacts
-.DS_Store
-thumbs.db
+# Package manager lock files
+package-lock.json
+yarn.lock
+pnpm-lock.yaml
