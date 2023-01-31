@@ -29,28 +29,8 @@ function main() {
   execaCommandSync("git pull --rebase");
   updateDependencies(args, packageManager);
   incrementVersion(args, packageManager);
-
-  if (!fileExists(BUILD_SCRIPT)) {
-    error(`Failed to find the build script: ${BUILD_SCRIPT}`);
-  }
-
-  try {
-    execaCommandSync(`bash ${BUILD_SCRIPT}`);
-  } catch (err) {
-    execaCommandSync("git reset --hard");
-    error("Failed to build the project:", err);
-  }
-
-  if (!fileExists(LINT_SCRIPT)) {
-    error(`Failed to find the build script: ${LINT_SCRIPT}`);
-  }
-
-  try {
-    execaCommandSync(`bash ${LINT_SCRIPT}`);
-  } catch (err) {
-    execaCommandSync("git reset --hard");
-    error("Failed to lint the project:", err);
-  }
+  buildProject();
+  lintProject();
 
   const version = getVersionOfThisPackage();
   gitCommitAllAndPush(`chore: release ${version}`);
@@ -105,5 +85,35 @@ function updateDependencies(args: Args, packageManager: PackageManager) {
   if (beforeHash !== afterHash) {
     execaCommandSync(`${packageManager} install`);
     gitCommitAllAndPush("chore: update deps");
+  }
+}
+
+function buildProject() {
+  if (!fileExists(BUILD_SCRIPT)) {
+    error(`Failed to find the build script: ${BUILD_SCRIPT}`);
+  }
+
+  console.log(`Running "${BUILD_SCRIPT}"...`);
+
+  try {
+    execaCommandSync(`bash ${BUILD_SCRIPT}`);
+  } catch (err) {
+    execaCommandSync("git reset --hard");
+    error("Failed to build the project:", err);
+  }
+}
+
+function lintProject() {
+  if (!fileExists(LINT_SCRIPT)) {
+    error(`Failed to find the build script: ${LINT_SCRIPT}`);
+  }
+
+  console.log(`Running "${LINT_SCRIPT}"...`);
+
+  try {
+    execaCommandSync(`bash ${LINT_SCRIPT}`);
+  } catch (err) {
+    execaCommandSync("git reset --hard");
+    error("Failed to lint the project:", err);
   }
 }
