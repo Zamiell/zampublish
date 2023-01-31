@@ -7,8 +7,17 @@
   // https://www.typescriptlang.org/docs/handbook/compiler-options.html
   "compilerOptions": {
     "outDir": "./dist",
+
+    // The default node TSConfig uses "commonjs" and "node", respectively.
+    "module": "Node16",
+    "moduleResolution": "node16",
+
+    // Performance optimization:
+    // https://github.com/IsaacScript/isaacscript/tree/main/packages/isaacscript-common-ts#tslib--importhelpers
+    "importHelpers": true,
   },
 
   // A list of the TypeScript files to compile.
   "include": ["./src/**/*.ts"],
+  "exclude": ["node_modules", "dist"],
 }
