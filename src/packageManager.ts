@@ -1,6 +1,6 @@
 import { error, getEnumValues } from "isaacscript-common-ts";
-import { PackageManager } from "./enums/PackageManager";
-import { fileExists } from "./file";
+import { PackageManager } from "./enums/PackageManager.js";
+import { fileExists } from "./file.js";
 
 const PACKAGE_MANAGER_LOCK_FILE_NAMES = {
   [PackageManager.NPM]: "package-lock.json",
