@@ -24,7 +24,8 @@
     "README.md"
   ],
   "scripts": {
-    "build": "rimraf dist && tsc"
+    "build": "rimraf dist && tsc",
+    "start": "node ./dist/main.js"
   },
   "dependencies": {
     "execa": "^6.1.0",

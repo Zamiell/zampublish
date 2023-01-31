@@ -11,7 +11,7 @@ export function isGitRepository(): boolean {
 
 export function isGitClean(): boolean {
   const { stdout } = execaCommandSync("git status --short");
-  return stdout.length > 0;
+  return stdout.length === 0;
 }
 
 export function gitCommitAllAndPush(message: string): void {
