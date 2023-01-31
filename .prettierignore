@@ -1,4 +1,4 @@
-# Ignore compiled output.
+# Compiled output
 dist
 
 # OS-specific artifacts
