@@ -14,7 +14,7 @@ import { gitCommitAllAndPush, isGitClean, isGitRepository } from "./git.js";
 import { isLoggedInToNPM } from "./npm.js";
 import { getPackageManagerUsedForThisProject } from "./packageManager.js";
 import { Args, parseArgs } from "./parseArgs.js";
-import { getVersionOfThisPackage } from "./version.js";
+import { getVersionOfThisPackage, incrementVersion } from "./version.js";
 
 main();
 
@@ -28,7 +28,7 @@ function main() {
 
   execaCommandSync("git pull --rebase");
   updateDependencies(args, packageManager);
-  execaCommandSync(`${packageManager} version --patch`);
+  incrementVersion(args, packageManager);
 
   if (!fileExists(BUILD_SCRIPT)) {
     error(`Failed to find the build script: ${BUILD_SCRIPT}`);
@@ -88,7 +88,6 @@ function validate() {
 
 function updateDependencies(args: Args, packageManager: PackageManager) {
   const skipUpdate = args.skipUpdate === true;
-
   if (skipUpdate) {
     return;
   }

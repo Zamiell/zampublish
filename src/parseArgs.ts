@@ -4,6 +4,9 @@ import { PACKAGE_JSON, PROJECT_NAME } from "./constants.js";
 export interface Args {
   _: string[];
 
+  major?: boolean;
+  minor?: boolean;
+  patch?: boolean;
   skipIncrement?: boolean;
   skipUpdate?: boolean;
 }
@@ -18,16 +21,29 @@ export function parseArgs(): Args {
     .alias("h", "help") // By default, only "--help" is enabled
     .alias("V", "version") // By default, only "--version" is enabled
 
-    .option("skip-increment", {
-      alias: "s",
+    .option("major", {
       type: "boolean",
-      description: `Do not increment the version number in the ${PACKAGE_JSON} file`,
+      description: `Perform a major version increment in the "${PACKAGE_JSON}" file`,
+    })
+
+    .option("minor", {
+      type: "boolean",
+      description: `Perform a minor version increment in the "${PACKAGE_JSON}" file`,
+    })
+
+    .option("patch", {
+      type: "boolean",
+      description: `Perform a patch version increment in the "${PACKAGE_JSON}" file`,
+    })
+
+    .option("skip-increment", {
+      type: "boolean",
+      description: `Do not increment the version number in the "${PACKAGE_JSON}" file`,
     })
 
     .option("skip-update", {
-      alias: "u",
       type: "boolean",
-      description: `Do not update dependencies in the ${PACKAGE_JSON} file`,
+      description: `Do not update dependencies in the "${PACKAGE_JSON}" file`,
     })
 
     .parseSync();
