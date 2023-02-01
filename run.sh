@@ -41,4 +41,4 @@ cd "$DIR"
 "$PACKAGE_MANAGER" run build
 node "$DIR/dist/main.js"
 
-echo "Successfully built in $SECONDS seconds."
+echo "Successfully published in $SECONDS seconds."
