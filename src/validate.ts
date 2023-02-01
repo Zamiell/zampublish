@@ -30,7 +30,7 @@ export function validate(): void {
   }
 }
 
-export function isLoggedInToNPM(): boolean {
+function isLoggedInToNPM(): boolean {
   try {
     execaCommandSync("npm whoami");
     return true;
