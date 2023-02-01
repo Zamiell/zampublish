@@ -12,10 +12,10 @@ import {
 } from "./constants.js";
 import { PackageManager } from "./enums/PackageManager.js";
 import { fileExists, getHashOfFile } from "./file.js";
-import { gitCommitAllAndPush, isGitClean, isGitRepository } from "./git.js";
-import { isLoggedInToNPM } from "./npm.js";
+import { gitCommitAllAndPush } from "./git.js";
 import { getPackageManagerUsedForThisProject } from "./packageManager.js";
 import { Args, parseArgs } from "./parseArgs.js";
+import { validate } from "./validate.js";
 import { getPackageJSONField, incrementVersion } from "./version.js";
 
 main();
@@ -40,32 +40,6 @@ function main() {
   execaCommandSync("npm publish --access public");
 
   console.log(`Published ${PROJECT_NAME} version ${version} successfully.`);
-}
-
-function validate() {
-  if (!isGitRepository()) {
-    error(
-      "Failed to publish since the current working directory is not inside of a git repository.",
-    );
-  }
-
-  if (!isGitClean()) {
-    error(
-      "Failed to publish since the Git repository was dirty. Before publishing, you must push any current changes to git. (Version commits should not contain any code changes.)",
-    );
-  }
-
-  if (!fileExists(PACKAGE_JSON)) {
-    error(
-      `Failed to find the "${PACKAGE_JSON}" file in the current working directory.`,
-    );
-  }
-
-  if (!isLoggedInToNPM()) {
-    error(
-      'Failed to publish since you are not logged in to npm. Try doing "npm login".',
-    );
-  }
 }
 
 function updateDependencies(args: Args, packageManager: PackageManager) {
