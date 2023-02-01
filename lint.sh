@@ -31,5 +31,6 @@ bash "$DIR/check-orphaned-words.sh"
 
 # Step 6 - Check for base file updates.
 bash "$DIR/check-file-updates.sh"
+#npx zamts@latest check
 
 echo "Successfully linted in $SECONDS seconds."

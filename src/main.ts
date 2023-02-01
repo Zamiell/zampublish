@@ -32,7 +32,7 @@ function main() {
   updateDependencies(args, packageManager);
   incrementVersion(args, packageManager);
   buildProject();
-  lintProject();
+  lintProject(args);
 
   const version = getPackageJSONField("version");
   gitCommitAllAndPush(`chore: release ${version}`);
@@ -105,7 +105,12 @@ function buildProject() {
   }
 }
 
-function lintProject() {
+function lintProject(args: Args) {
+  const skipLint = args.skipLint === true;
+  if (skipLint) {
+    return;
+  }
+
   if (!fileExists(LINT_SCRIPT)) {
     error(`Failed to find the build script: ${LINT_SCRIPT}`);
   }

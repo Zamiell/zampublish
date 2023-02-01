@@ -7,7 +7,9 @@ export interface Args {
   major?: boolean;
   minor?: boolean;
   patch?: boolean;
+
   skipIncrement?: boolean;
+  skipLint?: boolean;
   skipUpdate?: boolean;
 }
 
@@ -39,6 +41,11 @@ export function parseArgs(): Args {
     .option("skip-increment", {
       type: "boolean",
       description: `Do not increment the version number in the "${PACKAGE_JSON}" file`,
+    })
+
+    .option("skip-lint", {
+      type: "boolean",
+      description: "Do not bother linting the project before publishing",
     })
 
     .option("skip-update", {
