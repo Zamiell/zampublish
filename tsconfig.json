@@ -8,6 +8,8 @@
   "compilerOptions": {
     "outDir": "./dist",
 
+    // @template-customization-start
+
     // The default node TSConfig uses "commonjs" and "node", respectively.
     "module": "Node16",
     "moduleResolution": "node16",
@@ -15,9 +17,10 @@
     // Performance optimization:
     // https://github.com/IsaacScript/isaacscript/tree/main/packages/isaacscript-common-ts#tslib--importhelpers
     "importHelpers": true,
+
+    // @template-customization-end
   },
 
   // A list of the TypeScript files to compile.
   "include": ["./src/**/*.ts"],
-  "exclude": ["node_modules", "dist"],
 }

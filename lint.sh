@@ -30,7 +30,9 @@ npx ts-prune --error
 bash "$DIR/check-orphaned-words.sh"
 
 # Check for base file updates.
+# @template-customization-start
 # (We cannot depend on "zamts" since that would cause a circular dependency.)
-npx zamts@latest check
+npx zamts@latest check --ignore "run.sh"
+# @template-customization-end
 
 echo "Successfully linted in $SECONDS seconds."

@@ -7,7 +7,6 @@ import {
   BUILD_SCRIPT,
   LINT_SCRIPT,
   PACKAGE_JSON,
-  PROJECT_NAME,
   UPDATE_SCRIPT,
 } from "./constants.js";
 import { PackageManager } from "./enums/PackageManager.js";
@@ -39,7 +38,8 @@ function main() {
 
   execaCommandSync("npm publish --access public");
 
-  console.log(`Published ${PROJECT_NAME} version ${version} successfully.`);
+  const projectName = getPackageJSONField("name");
+  console.log(`Published ${projectName} version ${version} successfully.`);
 }
 
 function updateDependencies(args: Args, packageManager: PackageManager) {
