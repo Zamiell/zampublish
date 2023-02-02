@@ -7,4 +7,6 @@ set -e # Exit on any errors
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 
 cd "$DIR"
+
+# @template-ignore-next-line
 bash "$DIR/run.sh"

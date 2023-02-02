@@ -18,21 +18,22 @@ npx prettier --check .
 # in CI.
 npx eslint --max-warnings 0 .
 
-# Spell check every file using cspell.
-# We use "--no-progress" and "--no-summary" because we want to only output errors.
-npx cspell --no-progress --no-summary .
-
 # Check for unused imports.
 # The "--error" flag makes it return an error code of 1 if unused exports are found.
 npx ts-prune --error
+
+# Spell check every file using CSpell.
+# We use "--no-progress" and "--no-summary" because we want to only output errors.
+npx cspell --no-progress --no-summary .
 
 # Check for orphaned words.
 bash "$DIR/check-orphaned-words.sh"
 
 # Check for base file updates.
+# @template-ignore-next-line
+npx zamts@latest check
 # @template-customization-start
 # (We cannot depend on "zamts" since that would cause a circular dependency.)
-npx zamts@latest check --ignore "run.sh"
 # @template-customization-end
 
 echo "Successfully linted in $SECONDS seconds."

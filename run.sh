@@ -36,7 +36,10 @@ else
 fi
 
 cd "$DIR"
-"$PACKAGE_MANAGER" run build
-node "$DIR/dist/main.js"
 
-echo "Successfully published in $SECONDS seconds."
+# @template-ignore-next-line
+"$PACKAGE_MANAGER" run build
+
+# @template-customization-start
+node "$DIR/dist/main.js"
+# @template-customization-end
